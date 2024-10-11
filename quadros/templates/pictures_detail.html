@@ -1,0 +1,33 @@
+<!-- quadros/templates/pictures_detail.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card mx-auto" style="max-width: 600px;">
+        {% if picture.photo %}
+            <img src="{{ picture.photo.url }}" class="card-img-top" alt="{{ picture.model }}">
+        {% else %}
+            <img src="{% static 'default_image.jpg' %}" class="card-img-top" alt="Imagem não disponível">
+        {% endif %}
+        <div class="card-body text-center">
+            <h5 class="card-title">{{ picture.model }}</h5>
+            <p class="card-text"><strong>Artista:</strong> {{ picture.artist.name }}</p>
+            <p class="card-text"><strong>Ano de Fabricação:</strong> {{ picture.factory_year }}</p>
+            <p class="card-text"><strong>Valor:</strong> R$ {{ picture.value }}</p>
+            <p class="card-text"><strong>Estilo Artístico:</strong> {{ picture.get_artistic_style_display }}</p>
+            {% if picture.bio %}
+                <p class="card-text"><strong>Descrição:</strong> {{ picture.bio }}</p>
+            {% endif %}
+
+            <!-- Botões para Editar e Deletar -->
+            {% if user.is_authenticated %}
+                <a href="{% url 'pic_update' picture.pk %}" class="btn btn-primary">Editar</a>
+                <a href="{% url 'pic_delete' picture.pk %}" class="btn btn-danger">Deletar</a>
+                <!-- Removido o botão "Gerar Descrição" -->
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

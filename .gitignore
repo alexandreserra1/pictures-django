@@ -1,0 +1,42 @@
+# Sistema operacional e arquivos desnecessários
+*.DS_Store
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+staticfiles/
+
+# Diretório de uploads
+media/*
+
+# Virtualenv
+venv/
+ENV/
+env/
+
+# Editor de código (VSCode, PyCharm, etc.)
+.vscode/
+.idea/
+*.swp
+
+# Arquivos de configuração e chaves
+*.env
+.env.*
+config/
+settings.py
+
+# Arquivos de migração (opcional, apenas se deseja ignorar)
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Arquivos de compilação Python
+*.egg-info/
+.eggs/
+*.egg
+
+# Configurações de build
+build/
+dist/
+pip-wheel-metadata/

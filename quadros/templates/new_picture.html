@@ -1,0 +1,142 @@
+<!-- quadros/templates/new_picture.html -->
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}  <!-- Carrega o template tag para adicionar classes, se estiver usando django-widget-tweaks -->
+
+{% block content %}
+<style>
+    /* Estilos CSS personalizados */
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+        background-color: #f0f0f0;
+        padding: 20px;
+    }
+
+    form {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+        box-sizing: border-box;
+    }
+
+    form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #0096c7;
+        font-size: 24px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333333;
+    }
+
+    .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+</style>
+
+<div class="form-container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Adicionar Novo Quadro</h2>
+
+        <!-- Exibir erros gerais do formulário -->
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Campo de Imagem -->
+        <div class="form-group">
+            {{ form.photo.label_tag }}
+            {{ form.photo|add_class:"form-control" }}
+            {% if form.photo.errors %}
+                <div class="error">{{ form.photo.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Campo Modelo -->
+        <div class="form-group">
+            {{ form.model.label_tag }}
+            {{ form.model|add_class:"form-control" }}
+            {% if form.model.errors %}
+                <div class="error">{{ form.model.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Campo do Artista -->
+        <div class="form-group">
+            {{ form.artist_name.label_tag }}
+            {{ form.artist_name|add_class:"form-control" }}
+            {% if form.artist_name.errors %}
+                <div class="error">{{ form.artist_name.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Campo Ano de Fabricação -->
+        <div class="form-group">
+            {{ form.factory_year.label_tag }}
+            {{ form.factory_year|add_class:"form-control" }}
+            {% if form.factory_year.errors %}
+                <div class="error">{{ form.factory_year.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Campo Preço -->
+        <div class="form-group">
+            {{ form.value.label_tag }}
+            {{ form.value|add_class:"form-control" }}
+            {% if form.value.errors %}
+                <div class="error">{{ form.value.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Campo Estilo Artístico -->
+        <div class="form-group">
+            {{ form.artistic_style.label_tag }}
+            {{ form.artistic_style|add_class:"form-control" }}
+            {% if form.artistic_style.errors %}
+                <div class="error">{{ form.artistic_style.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Campo de Descrição -->
+        <div class="form-group">
+            {{ form.bio.label_tag }}
+            {{ form.bio|add_class:"form-control" }}
+            {% if form.bio.errors %}
+                <div class="error">{{ form.bio.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Botão de Submissão -->
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

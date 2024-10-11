@@ -1,0 +1,24 @@
+<!-- quadros/templates/pic_delete.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Deletar Quadro{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">Deletar Quadro</h3>
+        <p class="card-text">Tem certeza que deseja deletar o quadro "{{ object.model }}"?</p>
+        <form method="post">
+          {% csrf_token %}
+          <div class="buttons-container">
+            <button type="submit" class="btn btn-danger">Deletar</button>
+            <a href="{% url 'pic_detail' object.pk %}" class="btn btn-secondary">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
